@@ -1,0 +1,288 @@
+$--color--main: rgba(71, 88, 252, 1)
+$--color--page-bg: lighten($--color--main, 45%)
+$--color--font: darken($--color--main, 50%)
+
+$--color--focus: darken($--color--main, 30%)
+$--color--hover: lighten($--color--main, 15%)
+$--color--active: darken($--color--main, 50%)
+
+$--color--input-bg: lighten($--color--main, 35%)
+
+$--color--btn-bg: desaturate($--color--main, 15%)
+$--color--btn-font: lighten($--color--main, 35%)
+
+$--color--link: desaturate($--color--main, 25%)
+
+$-modal-box-shadow: 0 14px 37px rgba(33, 33, 33, .7)
+
+$-font-family: 'Roboto', sans-serif
+
+
+
+\:root
+    @include fluid-type(font-size, $minScreen, $maxScreen, $minFont, $maxFont)
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    &::before,
+    &::after
+        box-sizing: border-box
+    &::selection
+        background: rgba($--color--main, .8)
+
+html
+    position: relative
+    scrollbar-color: $--color--main transparent
+    scrollbar-width: thin
+
+body
+    font-family: $-font-family
+    color: $--color--font
+    background: $--color--page-bg
+    line-height: 1.2
+    &::-webkit-scrollbar
+        width: 6px
+    &::-webkit-scrollbar-track
+        -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, .2) inset
+        background-color: transparent
+    &::-webkit-scrollbar-thumb
+        border-radius: 5px
+        background: $--color--main
+        background-color: $--color--main
+
+.container
+    width: 100%
+    max-width: 1400px
+    margin: 0 auto
+    padding: .5em
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden
+    position: absolute
+    width: 1px
+    height: 1px
+    margin: -1px
+    border: 0
+    padding: 0
+    white-space: nowrap
+    clip-path: inset(100%)
+    clip: rect(0 0 0 0)
+    overflow: hidden
+
+h1
+    font-size: $h1
+
+h2
+    font-size: $h2
+
+h3
+    font-size: $h3
+
+h4
+    font-size: $h4
+
+h5
+    font-size: $h5
+
+p
+    font-size: $p
+
+button
+    padding: .5em .8em
+    font-size: $p
+    color: $--color--btn-font
+    background: $--color--btn-bg
+    border: 0
+    border-radius: 2px
+    cursor: pointer
+    transition: all 265ms ease-in
+    &:hover
+        background: $--color--hover
+    &:active
+        background: $--color--active
+
+a
+    font-size: $p
+    text-decoration: none
+    color: $--color--link
+    transition: all 265ms ease-in
+    &:hover
+        color: $--color--hover
+        & span
+            color: $--color--hover
+            transition: all 265ms ease-in
+    &:active
+        color: $--color--active
+    &:visited
+        color: desaturate($--color--main, 50%)
+
+button, a
+    &:focus
+        outline: 0
+        box-shadow: 0 0 0 2px $--color--focus
+
+img
+    width: 100%
+    height: auto
+    display: block
+    object-fit: cover
+
+picture
+    @include ie-only
+        width: 100%
+        height: 100%
+form
+    padding: .5em
+    border: 1px solid $--color--main
+    border-radius: 3px
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, .06)
+    & fieldset
+        display: flex
+        flex-direction: column
+        & legend
+            text-align: center
+        & p
+            margin-top: .5em
+        & button
+            margin-top: .5em
+            padding: .3em .8em
+
+input, textarea
+    width: 100%
+    padding: .5em .8em
+    background: $--color--input-bg
+    border: 1px solid
+    border-radius: 2px
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, .06)
+    &:focus
+        outline: 0
+        box-shadow: 0 0 0 2px $--color--focus
+
+input::-webkit-input-placeholder , textarea::-webkit-input-placeholder
+    @include placeholdersFont
+input::-moz-placeholder, textarea::-moz-placeholder
+    @include placeholdersFont
+input:-moz-placeholder, textarea:-moz-placeholder
+    @include placeholdersFont
+input:-ms-input-placeholder, textarea:-ms-input-placeholder
+    @include placeholdersFont
+
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder
+    @include placeholdersFontTranparent
+input:focus::-moz-placeholder, textarea:focus::-moz-placeholder
+    @include placeholdersFontTranparent
+input:focus:-moz-placeholder, textarea:focus:-moz-placeholder
+    @include placeholdersFontTranparent
+input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder
+    @include placeholdersFontTranparent
+
+.noscroll
+    overflow: hidden
+
+.header
+    &-content
+        @include flex
+        justify-content: space-between
+    &-logo
+        @include flex
+        & svg
+            width: 4rem
+            height: 1rem
+    &-nav
+        &__list
+            padding: .1em .5em
+            @include flex
+            justify-content: space-around
+        &__item
+            @include flex
+            margin-right: .5em
+            &:nth-last-child(1)
+                margin-right: 0
+
+.burger
+    display: none
+
+.social
+    width: 100%
+    @include flex
+    &-item
+        margin-right: 1em
+    &-link
+        display: block
+        &:hover
+            & .social-icon
+                fill: $--color--hover
+    &-icon
+        width: 1.8em
+        height: 1.8em
+        fill: $--color--main
+        transition: all 265ms ease-in
+
+.active
+    & .header
+        &-nav
+            &__list
+                transform: translateX(0%)
+            &__item
+                transform: translateX(0)
+    & .burger
+        left: 70%
+        &-line
+            transition: all 600ms cubic-bezier(0.9, 0, 0.33, 1)
+            &:nth-child(1)
+            transform: rotate(45deg) translate(.2rem, .3rem)
+            &:nth-child(2)
+                background: transparent
+            &:nth-child(3)
+                transform: rotate(135deg) translate(-.2rem, .35rem)
+
+.grid
+    &-list
+        display: grid
+        grid-template-columns: repeat(auto-fit,minmax(10em, 1fr))
+        grid-column-gap: 1em
+        grid-row-gap: 1em
+        @include ie-only
+            @include flex
+            align-items: flex-start
+            flex-wrap: wrap
+            justify-content: space-around
+    &-item
+        padding: .5em
+        @include flex
+        flex-direction: column
+        @include temp-red
+        @include ie-only
+            width: 30%
+            margin-bottom: 1em
+        &__img
+            min-height: 8rem
+            max-height: 1rem
+            margin: .5em 0
+            object-position: center
+        &__title,
+        &__desc
+            width: 100%
+            font-size: $small
+
+
+.overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    backdrop-filter: blur(3px)
+    transition: all 800ms
+    visibility: hidden
+
+.hidden
+    display: none
+    animation: fadeOut .5s
+    animation-fill-mode: forwards
+
+.show
+    visibility: visible

@@ -1,0 +1,10 @@
+.idea
+.publish
+gulp-tasks/
+node_modules
+gulpfile.js
+faviconData.json
+package-lock.json
+webpack.config.js
+package.json
+workspace.code-workspace
