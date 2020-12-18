@@ -19,11 +19,13 @@
         justify-content: flex-start
         border-radius: 0 10px 0 0
         overflow-y: auto
-        background: darken(rgba($--color--main, .82), 55%)
+        background: $--color--mobile--menu--list
+        background: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), .82)
         backdrop-filter: blur(5px)
         transform: translateX(-100%)
         transition: all 800ms cubic-bezier(0.8, 0, 0.33, 1)
       &__item
+        --delay: 20ms
         width: 100%
         margin: 0
         padding: .5em .2em .5em 1em
@@ -32,9 +34,9 @@
         transition: all 500ms cubic-bezier(0.8, 0, 0.33, 0.9)
         transition-delay: calc(30ms + var(--delay))
         &:nth-child(even)
-          background: lighten($--color--main, 10%)
+          background: hsla(var(--color-second-h), var(--color-second-s), var(--color-second-l), .8)
           & .nav-item__link
-            color: darken($--color--main, 50%)
+            color: hsla(var(--color-light-h), var(--color-light-s), var(--color-light-l), .8)
         & .nav-item__link
           width: 100%
           font-size: $h4
@@ -52,3 +54,62 @@
     &-line
       @include navMobileLine
   //Template END
+
+@include ie-only
+  body
+    color: $--color--dark
+    background: $--color--page-bg
+
+  button
+    color: $--color--light
+    background: $--color--primary
+    &:hover
+      background: $--color--hover
+    &:active
+      background: $--color--dark
+
+  a
+    color: $--color--link
+    &:hover
+      color: $--color--hover
+      & span
+        color: $--color--hover
+    &:active
+      color: $--color--dark
+    &:visited
+      color: $--color--link--visited
+
+  button, a, input, textarea
+    &:focus
+      box-shadow: 0 0 0 2px $--color--dark
+
+  form
+    border: 1px solid $--color--primary
+
+  input, textarea
+    background: $--color--light
+
+  textarea
+    min-height: 5em
+
+  .social
+    &-link
+      &:hover
+        & .social-icon
+          fill: $--color--hover
+    &-icon
+      fill: $--color--primary
+
+  .burger
+    &-line
+      background: $--color--primary
+
+  .grid
+    &-list
+      @include flex
+      align-items: flex-start
+      flex-wrap: wrap
+      justify-content: space-around
+    &-item
+      width: 30%
+      margin-bottom: 1em

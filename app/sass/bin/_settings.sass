@@ -1,26 +1,18 @@
-$--color--main: rgba(71, 88, 252, 1)
-$--color--page-bg: lighten($--color--main, 45%)
-$--color--font: darken($--color--main, 50%)
-
-$--color--focus: darken($--color--main, 30%)
-$--color--hover: lighten($--color--main, 15%)
-$--color--active: darken($--color--main, 50%)
-
-$--color--input-bg: lighten($--color--main, 35%)
-
-$--color--btn-bg: desaturate($--color--main, 15%)
-$--color--btn-font: lighten($--color--main, 35%)
-
-$--color--link: desaturate($--color--main, 25%)
+@import __colors-variables
+//----------------------------------------------------
 
 $-modal-box-shadow: 0 14px 37px rgba(33, 33, 33, .7)
-
 $-font-family: 'Roboto', sans-serif
 
+//----------------------------------------------------
 
-
-\:root
+\:root, [data-theme="default"]
     @include fluid-type(font-size, $minScreen, $maxScreen, $minFont, $maxFont)
+    --color-main: 234
+    @include defineColorHSL(--color-primary, $primary-hue, $primary-saturation, $primary-lightness)
+    @include defineColorHSL(--color-second, $second-hue, $second-saturation, $second-lightness)
+    @include defineColorHSL(--color-dark, $dark-hue, $dark-saturation, $dark-lightness)
+    @include defineColorHSL(--color-light, $light-hue, $light-saturation, $light-lightness)
 
 *
     margin: 0
@@ -30,17 +22,17 @@ $-font-family: 'Roboto', sans-serif
     &::after
         box-sizing: border-box
     &::selection
-        background: rgba($--color--main, .8)
+        background: hsla(var(--color-second-h), var(--color-second-s), var(--color-second-l), .8)
 
 html
     position: relative
-    scrollbar-color: $--color--main transparent
+    scrollbar-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 1) transparent
     scrollbar-width: thin
 
 body
     font-family: $-font-family
-    color: $--color--font
-    background: $--color--page-bg
+    color: hsla(var(--color-dark-h), var(--color-dark-s), var(--color-dark-l), 1)
+    background: hsla(var(--color-light-h), calc(var(--color-light-s) - 5%), calc(var(--color-light-l) + 9%), 1)
     line-height: 1.2
     &::-webkit-scrollbar
         width: 6px
@@ -49,8 +41,7 @@ body
         background-color: transparent
     &::-webkit-scrollbar-thumb
         border-radius: 5px
-        background: $--color--main
-        background-color: $--color--main
+        background-color: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 1)
 
 .container
     width: 100%
@@ -93,36 +84,36 @@ p
 button
     padding: .5em .8em
     font-size: $p
-    color: $--color--btn-font
-    background: $--color--btn-bg
+    color: hsla(var(--color-light-h), var(--color-light-s), var(--color-light-l), 1)
+    background: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 1)
     border: 0
     border-radius: 2px
     cursor: pointer
     transition: all 265ms ease-in
     &:hover
-        background: $--color--hover
+        background: hsla(var(--color-second-h), calc(var(--color-second-s) - 19%), calc(var(--color-second-l) - 32%), 1)
     &:active
-        background: $--color--active
+        background: hsla(var(--color-dark-h), var(--color-dark-s), var(--color-dark-l), 1)
 
 a
     font-size: $p
     text-decoration: none
-    color: $--color--link
+    color: hsla(var(--color-second-h), calc(var(--color-second-s) - 4%), calc(var(--color-second-l) - 22%), 1)
     transition: all 265ms ease-in
     &:hover
-        color: $--color--hover
+        color: hsla(var(--color-second-h), calc(var(--color-second-s) - 19%), calc(var(--color-second-l) - 32%), 1)
         & span
-            color: $--color--hover
+            color: hsla(var(--color-second-h), calc(var(--color-second-s) - 19%), calc(var(--color-second-l) - 32%), 1)
             transition: all 265ms ease-in
     &:active
-        color: $--color--active
+        color: hsla(var(--color-dark-h), var(--color-dark-s), var(--color-dark-l), 1)
     &:visited
-        color: desaturate($--color--main, 50%)
+        color: hsla(var(--color-dark-h), var(--color-dark-s), calc(var(--color-dark-l) + 30%), 1)
 
-button, a
+button, a, input, textarea
     &:focus
         outline: 0
-        box-shadow: 0 0 0 2px $--color--focus
+        box-shadow: 0 0 0 2px hsla(var(--color-dark-h), var(--color-dark-s), var(--color-dark-l), 1)
 
 img
     width: 100%
@@ -136,7 +127,7 @@ picture
         height: 100%
 form
     padding: .5em
-    border: 1px solid $--color--main
+    border: 1px solid hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 1)
     border-radius: 3px
     box-shadow: 4px 4px 10px rgba(0, 0, 0, .06)
     & fieldset
@@ -153,13 +144,10 @@ form
 input, textarea
     width: 100%
     padding: .5em .8em
-    background: $--color--input-bg
+    background: hsla(var(--color-light-h), var(--color-light-s), var(--color-light-l), 1)
     border: 1px solid
     border-radius: 2px
     box-shadow: 4px 4px 10px rgba(0, 0, 0, .06)
-    &:focus
-        outline: 0
-        box-shadow: 0 0 0 2px $--color--focus
 
 input::-webkit-input-placeholder , textarea::-webkit-input-placeholder
     @include placeholdersFont
@@ -214,11 +202,11 @@ input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder
         display: block
         &:hover
             & .social-icon
-                fill: $--color--hover
+                fill: hsla(var(--color-second-h), calc(var(--color-second-s) - 19%), calc(var(--color-second-l) - 32%), 1)
     &-icon
         width: 1.8em
         height: 1.8em
-        fill: $--color--main
+        fill: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 1)
         transition: all 265ms ease-in
 
 .active
@@ -241,23 +229,16 @@ input:focus:-ms-input-placeholder, textarea:focus:-ms-input-placeholder
 
 .grid
     &-list
+        --items-width: 7em
         display: grid
-        grid-template-columns: repeat(auto-fit,minmax(10em, 1fr))
-        grid-column-gap: 1em
-        grid-row-gap: 1em
-        @include ie-only
-            @include flex
-            align-items: flex-start
-            flex-wrap: wrap
-            justify-content: space-around
+        grid-template-columns: repeat(auto-fit,minmax(var(--items-width), 1fr))
+        grid-column-gap: .5em
+        grid-row-gap: .5em
     &-item
         padding: .5em
         @include flex
         flex-direction: column
         @include temp-red
-        @include ie-only
-            width: 30%
-            margin-bottom: 1em
         &__img
             min-height: 8rem
             max-height: 1rem
