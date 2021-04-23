@@ -1,10 +1,15 @@
-doctype html
-html(lang="en")
-    head
-        include ../modules/head
-    body(data-theme="default")
-        include ../modules/header
-        include ../modules/content
-        include ../modules/demo
-        include ../modules/footer
-        script(src="/js/script.bundle.js")
+extends ../layouts/page
+
+block variables
+    - const lang = 'en';
+
+    - const pageTitle = 'Some service';
+
+block append head
+
+block content
+    include ../components/content
+    include ../components/demo
+
+block controls
+

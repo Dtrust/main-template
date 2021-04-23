@@ -77,7 +77,7 @@ gulp.task('get-favicon', function(done) {
 // as is or refactor your existing HTML pipeline.
 
 gulp.task('inject-favicon-markups', function() {
-    return gulp.src([ './app/pug/modules/head.pug' ])
+    return gulp.src([ './app/pug/components/head.pug' ])
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
         // .pipe(gulp.src('TODO: Path to the directory where to store the HTML files'));
 });
